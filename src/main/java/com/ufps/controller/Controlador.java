@@ -1,8 +1,8 @@
 package com.ufps.controller;
 
-public class Controller {
+public class Controlador {
 
-	public Controller() {
+	public Controlador() {
 		// TODO Auto-generated constructor stub
 	}
 
