@@ -64,7 +64,10 @@ public class Controlador {
 	    	service.delete(id);
 	    	return "redirect:/listar";
 	    }
-	    
+	    @GetMapping("/login")
+	    public String login(){
+	        return "login";
+	    }
 	    
 
 		@GetMapping("/login")
