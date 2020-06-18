@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 import com.ufps.handler.LoginSuccessHandler;
-import com.ufps.service.JpaUserDetailsService;
+
 import javax.sql.DataSource;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
