@@ -1,15 +1,25 @@
 package com.ufps.service;
 
+
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ufps.interfaceService.IUsuarioService;
+import com.ufps.interfaces.IUsuario;
+import com.ufps.modelo.Usuario;
+
+
+
 @Service
-public class UsuarioService implements IusuarioService{
+public class UsuarioService implements IUsuarioService{
 
 	@Autowired
 	private IUsuario data;
 	
-	@Override
+	
 	public List<Usuario> listar() {
 		
 		

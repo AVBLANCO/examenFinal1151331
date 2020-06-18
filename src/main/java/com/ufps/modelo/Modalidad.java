@@ -1,33 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ufps.modelo;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import java.sql.Date;
+import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
+/**
+ *
+ * @author USUARIO
+ */
 @Entity
 @Table(name = "modalidad")
+public class Modalidad implements Serializable {
 
-
-public class Modalidad {
-
-   
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -61,7 +58,7 @@ public class Modalidad {
         this.descripcion = descripcion;
     }
 
-  
+    
     public List<Basico> getBasicoList() {
         return basicoList;
     }
@@ -69,4 +66,6 @@ public class Modalidad {
     public void setBasicoList(List<Basico> basicoList) {
         this.basicoList = basicoList;
     }
+
+    
 }

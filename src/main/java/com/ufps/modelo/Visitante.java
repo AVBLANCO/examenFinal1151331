@@ -1,9 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ufps.modelo;
 
-
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,17 +17,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+/**
+ *
+ * @author USUARIO
+ */
 @Entity
 @Table(name = "visitante")
+public class Visitante implements Serializable {
 
-
-public class Visitante  {
-
-   
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -101,7 +107,7 @@ public class Visitante  {
         this.genero = genero;
     }
 
-
+    
     public List<Accesovisitante> getAccesovisitanteList() {
         return accesovisitanteList;
     }
@@ -118,4 +124,5 @@ public class Visitante  {
         this.empresa = empresa;
     }
 
+    
 }

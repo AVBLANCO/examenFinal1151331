@@ -1,9 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ufps.modelo;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,12 +23,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ *
+ * @author USUARIO
+ */
 @Entity
 @Table(name = "basico")
+public class Basico implements Serializable {
 
-
-public class Basico  {
-
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -55,7 +64,7 @@ public class Basico  {
     @Column(name = "fechareg")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechareg;
-    @OneToOne( mappedBy = "basico")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "basico")
     private Cormobilidad cormobilidad;
     @JoinColumn(name = "eps", referencedColumnName = "id")
     @ManyToOne
@@ -225,6 +234,5 @@ public class Basico  {
     public void setRegistroList(List<Registro> registroList) {
         this.registroList = registroList;
     }
-
     
 }

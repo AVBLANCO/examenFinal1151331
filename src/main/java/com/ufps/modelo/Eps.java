@@ -1,26 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ufps.modelo;
 
-import java.sql.Date;
+import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.OneToMany;
-
 import javax.persistence.Table;
 
+/**
+ *
+ * @author USUARIO
+ */
 @Entity
 @Table(name = "eps")
+public class Eps implements Serializable {
 
-
-public class Eps  {
-
-   
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -54,7 +58,7 @@ public class Eps  {
         this.descripcion = descripcion;
     }
 
-
+   
     public List<Basico> getBasicoList() {
         return basicoList;
     }
@@ -63,5 +67,4 @@ public class Eps  {
         this.basicoList = basicoList;
     }
 
- 
 }

@@ -1,29 +1,35 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ufps.modelo;
 
-
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+/**
+ *
+ * @author USUARIO
+ */
 @Entity
 @Table(name = "registro")
+public class Registro implements Serializable {
 
-
-public class Registro {
-
-  
+    private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "id")
@@ -158,7 +164,7 @@ public class Registro {
         this.covid = covid;
     }
 
-
+    
     public List<Acceso> getAccesoList() {
         return accesoList;
     }

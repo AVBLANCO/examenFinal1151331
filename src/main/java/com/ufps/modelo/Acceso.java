@@ -1,7 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ufps.modelo;
 
-import java.sql.Date;
-
+import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,23 +19,22 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import java.util.Calendar;
-import java.util.Objects;
-
+/**
+ *
+ * @author USUARIO
+ */
 @Entity
 @Table(name = "acceso")
+public class Acceso implements Serializable {
 
-
-public class Acceso  {
-
- 
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "fechareg", updatable = false, nullable = false)
+    @Column(name = "fechareg")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechareg;
     @Column(name = "estado")
@@ -83,5 +87,5 @@ public class Acceso  {
         this.registro = registro;
     }
 
-    
+  
 }
