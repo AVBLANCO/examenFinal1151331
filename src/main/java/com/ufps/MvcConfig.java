@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 
+@SuppressWarnings("hiding")
 @Configuration
 public class MvcConfig<BCryptPasswordEncoder> implements WebMvcConfigurer {
 
@@ -35,7 +36,7 @@ public class MvcConfig<BCryptPasswordEncoder> implements WebMvcConfigurer {
 		registry.addViewController("/error_403").setViewName("error_403");
 	}
 
-	@Bean
+	
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}

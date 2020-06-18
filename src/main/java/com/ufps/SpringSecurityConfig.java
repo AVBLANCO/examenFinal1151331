@@ -8,15 +8,26 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import examenfinal_handler.*;
-import examenfinal_service.*;
 
+import com.ufps.handler.LoginSuccessHandler;
+import com.ufps.service.JpaUserDetailsService;
+import javax.sql.DataSource;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import org.springframework.context.annotation.Bean;
+
+
+@SuppressWarnings("deprecation")
 @EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled=true)
-@Configuration
-public class SpringSecurityConfig<BCryptPasswordEncoder> extends WebSecurityConfigurerAdapter{
 
+@Configuration
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	 @Autowired
+	    DataSource dataSource;
 	@Autowired
 	private LoginSuccessHandler successHandler;
 	
@@ -29,30 +40,32 @@ public class SpringSecurityConfig<BCryptPasswordEncoder> extends WebSecurityConf
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/", "/css/**", "/js/**", "/images/**", "/listar").permitAll()
-		/*.antMatchers("/ver/**").hasAnyRole("rol")*/
-		/*.antMatchers("/uploads/**").hasAnyRole("rol")*/
-		/*.antMatchers("/form/**").hasAnyRole("rol")*/
-		/*.antMatchers("/eliminar/**").hasAnyRole("rol")*/
-		/*.antMatchers("/factura/**").hasAnyRole("rol")*/
-		.anyRequest().authenticated()
-		.and()
-		    .formLogin()
-		        .successHandler(successHandler)
-		        .loginPage("/login")
-		    .permitAll()
-		.and()
-		.logout().permitAll()
-		.and()
-		.exceptionHandling().accessDeniedPage("/error_403");
 
-	}
+		http.authorizeRequests()
+        .antMatchers("/","/login","/index","/registro","/css/**",, "/js/**").permitAll()
+        .antMatchers("/guest").hasAnyRole("ADMIN")
+        .antMatchers("/admin").hasAnyRole("ADMIN")
+        .anyRequest().authenticated()
+        .and().formLogin().loginPage("/login").permitAll()
+        .and().logout()
+        .invalidateHttpSession(true)
+        .clearAuthentication(true)
+        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .logoutSuccessUrl("/login?logout");
 
-	@Autowired
-	public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception
-	{
-		build.userDetailsService(userDetailsService)
-		.passwordEncoder((PasswordEncoder) passwordEncoder);
-
-	}
+}
+	@Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select usuario as username, password, enabled" + " from usuario" + " where usuario=?")
+                .authoritiesByUsernameQuery("select username, authority " + "from authorities " + "where username = ? ");
+                
+    }
+    
+    @Bean
+    public PasswordEncoder getPasswordEncoder(){
+        return NoOpPasswordEncoder.getInstance();
+    }
+  
 }
