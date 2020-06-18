@@ -30,9 +30,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	    DataSource dataSource;
 	@Autowired
 	private LoginSuccessHandler successHandler;
-	
-	@Autowired
-	private JpaUserDetailsService userDetailsService;
+
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -42,7 +40,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 
 
 		http.authorizeRequests()
-        .antMatchers("/","/login","/index","/registro","/css/**",, "/js/**").permitAll()
+        .antMatchers("/","/login","/index","/registro","/css/**", "/js/**").permitAll()
         .antMatchers("/guest").hasAnyRole("ADMIN")
         .antMatchers("/admin").hasAnyRole("ADMIN")
         .anyRequest().authenticated()
