@@ -28,6 +28,7 @@ public class Controlador {
 			return "index";
 		}
 	    
+	    //mapeo a la vista Login
 	    @GetMapping("/")
 	   	public String listar2 (Model model) {
 	   		return "Login";
